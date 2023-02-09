@@ -38,9 +38,7 @@ then
 fi
 
 # Initialize database
-
 /usr/pgsql-15/bin/postgresql-15-setup initdb
-
 
 # Change "max_connections" parameter to 200
 sed -i -e 's/max_connections = 100/max_connections = 200/g' /var/lib/pgsql/15/data/postgresql.conf
@@ -49,26 +47,16 @@ sed -i -e 's/max_connections = 100/max_connections = 200/g' /var/lib/pgsql/15/da
 systemctl start postgresql-15
 systemctl enable postgresql-15
 
-# Define password for users 'postgresql' and 'vbuser'
-
+# Define password for user 'postgres'
 psqlpassword='Pa$$w0rd'
-vbuserpassword='Pa$$w0rd'
 
-
-# Update password for postgresql user
+# Update password for postgres user
 su - postgres -c "psql -c \"alter user postgres with password '\"'${psqlpassword}'\"'\""
-
-
-# Create user vbuser and set the password
-su - postgres -c "psql -c \"CREATE USER vbuser WITH ENCRYPTED PASSWORD '\"'${vbuserpassword}'\"'\""
-su - postgres -c "psql -c \"ALTER USER vbuser CREATEDB\""
-
 
 # Enable remote connections to PostgreSQL
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /var/lib/pgsql/15/data/postgresql.conf
 sed -i "s/127.0.0.1\/32            /0.0.0.0\/0 /g" /var/lib/pgsql/15/data/pg_hba.conf
 systemctl restart postgresql-15
-
 
 # Add rule to local firewall
 firewall-cmd --zone=public --permanent --add-port 5432/tcp
