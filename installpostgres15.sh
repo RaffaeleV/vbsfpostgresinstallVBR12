@@ -43,6 +43,9 @@ fi
 # Change "max_connections" parameter to 200
 sed -i -e 's/max_connections = 100/max_connections = 200/g' /var/lib/pgsql/15/data/postgresql.conf
 
+# Add "pg_stat_statements" to the shared_preload_libraries
+sed -i "s/#shared_preload_libraries = ''/shared_preload_libraries = 'pg_stat_statements'/g" /var/lib/pgsql/15/data/postgresql.conf
+
 # Start PostgreSQL and enable auto-start
 systemctl start postgresql-15
 systemctl enable postgresql-15
