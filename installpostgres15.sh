@@ -16,7 +16,7 @@ then
 
   # CENTOS/RHEL 7
   yum -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-  yum -y install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.2-1.el7.x86_64.rpm
+  yum -y install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.4-1.el7.x86_64.rpm
   yum -y update
   yum -y install postgresql15-server postgresql15-contrib yum-plugin-versionlock
 
@@ -28,7 +28,7 @@ then
 
   # CENTOS/RHEL 8
   dnf -y install https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
-  dnf -y install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.2-1.el7.x86_64.rpm
+  dnf -y install https://download-ib01.fedoraproject.org/pub/epel/7/x86_64/Packages/l/libzstd-1.5.4-1.el7.x86_64.rpm
   dnf -qy module disable postgresql
   dnf -y install postgresql15-server postgresql15-contrib python3-dnf-plugin-versionlock
 
